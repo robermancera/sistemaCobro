@@ -8,6 +8,17 @@ body{
     width:80%;
     position: absolute;
     margin:10%;
+    box-shadow:1px 1px 10px -5px;
+    
+    
+}
+
+.huver{
+    opacity:.9;
+}
+.huver:hover{
+    opacity:1;
+    transition: 1s ease all;
 }
 
 .dos{
