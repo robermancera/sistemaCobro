@@ -1,0 +1,23 @@
+body{
+    width: 100%;
+    position: absolute;
+
+}
+
+.center{
+    width:80%;
+    position: absolute;
+    margin:10%;
+}
+
+.dos{
+    width:70%;
+    margin-left:15%;
+    margin-right:15%;
+}
+
+.bloque{
+    width:40%;
+    position: relative;
+    display: inline-flex;
+}
