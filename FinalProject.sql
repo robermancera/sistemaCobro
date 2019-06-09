@@ -9,3 +9,6 @@ CREATE TABLE tbl_pago(fld_id INT(3), fld_fecha date, fld_cantidad int(20), fld_i
 
 CREATE TABLE tbl_deudas(fld_id INT(3), fld_fecha date, fld_cantidad int(20),fld_concepto VARCHAR(255), fld_id_usuario int(20), primary key(fld_id));
 
+INSERT INTO tbl_usuario VALUES 
+(1,'Roberto','3121068091','robermancera@gmail.com','roberto',TRUE),
+(2,'Carlos','3121187115','carlos@carlos.com','tontarlos',FALSE);
