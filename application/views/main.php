@@ -38,7 +38,7 @@
     <section class="center">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-3">Bienvenido administrador <?php echo $name ?></h1>
+            <h1 class="display-3">Bienvenido administrador</h1>
             <p class="lead">Eres libre de revisar todos los pagos, siempre y cuando
                 no intentes hacer <i><b>code injection</i></b>
             </p>
