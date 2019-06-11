@@ -64,22 +64,22 @@
             <h1 class="display-4">Registro de Cliente</h1>
             <p class="lead">
             Ingresa por favor estos datos:
-            <form>
+            <form action="<?php echo base_url(); ?>index.php/Register/doRegister" method="post">
                     <div class="form-group">
                             <label for="formGroupExampleInput">Nombre:</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre">
+                            <input type="text" name='name' class="form-control" id="formGroupExampleInput" placeholder="Nombre">
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Teléfono:</label>
-                        <input type="number" class="form-control" id="formGroupExampleInput" placeholder="Teléfono">
+                        <input type="number" name='phone' class="form-control" id="formGroupExampleInput" placeholder="Teléfono">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Correo electrónico</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="correo@ejemplo.mx">
+                        <input type="email" name='email' class="form-control" id="exampleFormControlInput1" placeholder="correo@ejemplo.mx">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                        <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
                     </div>
                           <button type="submit" class="btn btn-primary">Submit</button>
             </form>
