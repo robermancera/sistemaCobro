@@ -14,6 +14,7 @@ class Login extends CI_Controller {
         
         //load the Login Model
         $this->load->model('LoginModel', 'login');
+        $this->load->model('DebtIndexModel', 'debtindex');
     }
 
     public function index() {
@@ -24,6 +25,7 @@ class Login extends CI_Controller {
             // redirect(base_url().'welcome_message');
             $this->load->view('main');
         }else{
+
             //if not load the login page
             $this->load->view('login');
         }
@@ -35,7 +37,7 @@ class Login extends CI_Controller {
         $phone = $this->input->post('phone');
         $password = $this->input->post('password');
         $propietario = $this->db->where('fld_propietario');
-        $this->db->get('tbl_usuario');
+        $this->db->get('users');
         
         //send the email pass to query if the user is present or not
         $user = $this->login->checkLogin($phone, $password);
@@ -50,12 +52,27 @@ class Login extends CI_Controller {
                 $this->load->view('main', $data);
                 //Vista de propietario
             }
-            else{
-                $this->load->view('welcome_message');
+            else{  
+                $data['debt'] = $this->debtindex->seeAmountDebt($user[0]['fld_id']);
+                $data['pay'] = $this->debtindex->seeAmountPay($user[0]['fld_id']);
+
+                $d = count($data['debt']);
+                $p = count($data['pay']);
+
+                $max = $d;
+                if( $p > $max) $max = $p;
+
+                $data['max'] = $max;
+                $data['name'] =$user[0]['fld_nombre'] ;
+                $data['userid'] = $user[0]['fld_id'];
+                $this->load->view('debtIndex', $data);
+              
                 //Vista de deudor
             }
             //if yes then set the session 'loggin_in' as true
             $this->session->set_userdata('logged_in', true);
+    
+
             // redirect(base_url().'welcome');
         } else {
             //if no then set the session 'logged_in' as false
@@ -82,11 +99,20 @@ class Login extends CI_Controller {
 
     public function toMain()
     {
-        $this->load->view('main', $data);
+        
+        $this->load->view('main');
+
     }
  
     public function toPageRegister()
     {
         $this->load->view('page_register');
+    }
+
+    public function toPagar()
+    {
+        $this->load->model('PayModel','pay');
+        $data['deudas'] = $this->pay->seeInfo();
+        $this->load->view('pagar', $data);
     }
 }
