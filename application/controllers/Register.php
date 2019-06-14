@@ -28,26 +28,23 @@ class Register extends CI_Controller {
     //register validation and logic
     public function doRegister() {
         //set the form validation here
-        $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
-        $this->form_validation->set_message('is_unique', 'Email already exists.');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[4]');
-
+        
         //if the above validation fails, redirect to register page
         //with vaildation_errors();
-        if ($this->form_validation->run() == FALSE) {
-            //set the validation errors in flashdata (one time session)
-            $this->session->set_flashdata('errors', validation_errors());
-            $this->load->view('main');
-        } else {
             //if not get the input values
             $name = $this->input->post('name');
             $email = $this->input->post('email');
             $phone = $this->input->post('phone');
             $password = $this->input->post('password');
+            $propietario = '0';
 
-            $data = [
-                'name' => $name, 'email' => $email, 'phone' => $phone, 'password' => $password
+            $data = 
+            [
+                'fld_nombre' => $name,
+                'fld_telefono' => $phone,
+                'fld_correo' => $email, 
+                'fld_password' => $password, 
+                'fld_propietario' => $propietario
             ];
 
             //pass the input values to the register model
@@ -56,9 +53,9 @@ class Register extends CI_Controller {
             //if data inserted then set the success message and redirect to login page
             if ($insert_data) {
                 $this->session->set_flashdata('msg', 'Successfully Register, Login now!');
-                echo('Si se armo compa');
-                $this->load->view('main');
+                $data['mensaje']='Si se armo compa';
+                $this->load->view('main', $data);
             }
-        }
+        
     }
 }
