@@ -25,7 +25,7 @@
                     </li>
                     <li>
                     <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>index.php/Login/toMovimiento">Movimientos</a>
+                            <a class="nav-link" href="<?=base_url().'index.php/Payroll/getInfo'?>">Movimientos</a>
                             </li>
                     </li>
                     </ul>    
@@ -64,8 +64,8 @@
             <h1 class="display-4">Página Movimientos</h1>
             <p class="lead">
               En esta página podrás realizar las funciones básicas para obtener los movimientos<br>
-              <button type="button" class="btn btn-outline-primary">Deudores</button>
-              <button type="button" class="btn btn-outline-primary">Pagos</button>
+              <a class="navbar-brand" href="<?=base_url().'index.php/Payroll/getInfo'?>">Deuda</a>
+              <a class="navbar-brand" href="<?=base_url().'index.php/Login/toPagar'?>">Pagar</a>
             </p>
         </div>
         </div>
@@ -77,13 +77,10 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>Checkbox</th>
                     <th>Nombre</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>Id. Deuda</th>
-                    <th>Fecha Deuda</th>
-                    <th>Cantidad Deuda</th>
                     
                     <!--
                       SELECT 
@@ -91,29 +88,30 @@
                           tbl_usuario.fld_nombre, 
                           tbl_usuario.fld_telefono,
                           tbl_usuario.fld_correo,
-                          tbl_deudas.fld_id,
+                         tbl_deudas.fld_id,
                           tbl_deudas.fld_fecha,
                           tbl_deudas.fld_cantidad
                       FROM INNER JOIN tbl_usuario ON tbl_usuario.fld_id = tbl_deudas.fld_id_usuario;
                     -->
                   </tr>
                 </thead>
+                <form action="<?php echo base_url(); ?>index.php/Payroll/createDebt" method="post">
                 <tbody>
+                <?php foreach ($deudas as $deuda):?>
                   <tr>
-                    <!--
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    -->
+                    <td><input type="checkbox" name="idch[]" value='<?php echo $deuda['fld_id']?>'></td>
+                    <td><?php echo $deuda['fld_nombre']?></td>
+                    <td><?php echo $deuda['fld_telefono']?></td>
+                    <td><?php echo $deuda['fld_correo']?></td>
                   </tr>
-                  <tr>
-                    <!-- 
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                  -->
-                  </tr>
+                <?php endforeach;?>
                 </tbody>
+           
+                <p>Asignar deuda &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asignar concepto</p>
+                <input type="number" name='amountDebt'>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="text" name='concept'>
+                </form>
               </table>
               
             </table>
@@ -122,7 +120,5 @@
     </div>
                     
     </section>
-
-        
 </body>
 </html>
